@@ -1,0 +1,237 @@
+/* --- Root Variables for easy theme management --- */
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --card-bg-color: rgba(255, 255, 255, 0.1);
+    --text-color: #f0f0f0;
+    --text-color-dark: #ccc;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --input-bg-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Basic Reset & Body Styling --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden; /* Prevents scrollbars from background elements */
+}
+
+/* --- Animated Background Elements --- */
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    animation: float 15s infinite ease-in-out;
+}
+
+.c1 { width: 200px; height: 200px; top: 10%; left: 15%; animation-duration: 12s; }
+.c2 { width: 300px; height: 300px; top: 60%; left: 70%; animation-duration: 18s; }
+.c3 { width: 150px; height: 150px; top: 30%; left: 40%; animation-duration: 15s; }
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* --- Main Glassmorphism Card --- */
+.container {
+    background: var(--card-bg-color);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    z-index: 1;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Typography & Title --- */
+.gradient-text {
+    font-weight: 700;
+    font-size: 2.5em;
+    background: linear-gradient(90deg, #ffffff, #d4d4d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    color: var(--text-color-dark);
+    font-size: 1em;
+}
+
+/* --- Form & Input Styling with Icon --- */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-dark);
+    pointer-events: none; /* Icon does not block clicks */
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px 20px 15px 50px; /* Left padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background: var(--input-bg-color);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-color-dark);
+}
+
+input[type="text"]:focus {
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(37, 117, 252, 0.5);
+    border-color: var(--secondary-color);
+}
+
+/* --- New Loader Animation --- */
+.loader-container {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: none; /* Initially hidden */
+    box-shadow: 22px 0 #fff, -22px 0 #fff; /* White dots */
+    position: relative;
+    animation: flash 0.5s ease-out infinite alternate;
+}
+
+@keyframes flash {
+    0% {
+        background: #fff;
+        box-shadow: 22px 0 #fff, -22px 0 #fff;
+    }
+    50% {
+        background: rgba(255,255,255,0.3);
+        box-shadow: 22px 0 rgba(255,255,255,0.3), -22px 0 #fff;
+    }
+    100% {
+        background: rgba(255,255,255,0.3);
+        box-shadow: 22px 0 #fff, -22px 0 rgba(255,255,255,0.3);
+    }
+}
+
+/* --- Result Area Styling --- */
+#result {
+    margin-top: 25px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    text-align: left;
+    line-height: 1.9;
+    animation: fadeInUp 0.5s ease;
+    display: none; /* Initially hidden by JS logic */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#result.error {
+    background-color: rgba(255, 82, 82, 0.2);
+    border: 1px solid rgba(255, 82, 82, 0.5);
+}
+
+#result p {
+    margin: 5px 0;
+}
+
+#result strong {
+    color: #fff;
+    font-weight: 500;
+}
+
+#result a {
+    color: #8ab4f8;
+    text-decoration: none;
+}
+
+/* --- Footer --- */
+footer {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: var(--text-color-dark);
+    opacity: 0.8;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        margin-top: 20px;
+    }
+    .gradient-text {
+        font-size: 2em;
+    }
+}
